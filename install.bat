@@ -3,37 +3,71 @@ setlocal
 
 :: ---- CONFIG ----
 set ADDIN_NAME=SaveAsPDF-5.ppam
-set SOURCE_DIR=%~dp0        :: Folder where this .bat and the .ppam are placed
+set SOURCE_DIR=%~dp0
 set DEST_DIR=%APPDATA%\Microsoft\AddIns
+set FRIENDLY_NAME=Save As PDF Add-in
+set DESCRIPTION=Exports presentations as PDF in same folder
 
-:: ---- CREATE DESTINATION FOLDER ----
+:: ---- DETECT OFFICE VERSION ----
+set OFFICE_VER=
+for %%V in (16.0 15.0 14.0 12.0) do (
+    reg query "HKCU\Software\Microsoft\Office\%%V\PowerPoint" >nul 2>&1
+    if not errorlevel 1 (
+        set OFFICE_VER=%%V
+        goto :found
+    )
+)
+
+:found
+if "%OFFICE_VER%"=="" (
+    echo ⚠️ Could not detect Office version. Registry operations may be skipped.
+)
+
+set ADDIN_KEY=HKCU\Software\Microsoft\Office\%OFFICE_VER%\PowerPoint\AddIns\SaveAsPDF-5
+set STARTUP_KEY=HKCU\Software\Microsoft\Office\%OFFICE_VER%\PowerPoint\AddInsStartup\SaveAsPDF-5
+
+:: ---- UNINSTALL MODE ----
+if /I "%~1"=="/uninstall" (
+    echo 🔴 Uninstalling %ADDIN_NAME% ...
+
+    echo Removing add-in file...
+    del /Q "%DEST_DIR%\%ADDIN_NAME%" >nul 2>&1
+
+    echo Removing registry keys...
+    reg delete "%ADDIN_KEY%" /f >nul 2>&1
+    reg delete "%STARTUP_KEY%" /f >nul 2>&1
+
+    echo ✅ Uninstall complete.
+    pause
+    exit /b
+)
+
+:: ---- NORMAL INSTALL ----
+echo 🟢 Installing %ADDIN_NAME% ...
+
+:: Create destination folder
 if not exist "%DEST_DIR%" (
     echo Creating AddIns folder: "%DEST_DIR%"
     mkdir "%DEST_DIR%"
 )
 
-:: ---- COPY THE ADD-IN ----
+:: Copy the add-in
 echo Copying %ADDIN_NAME% to "%DEST_DIR%"
-copy /Y "%SOURCE_DIR%%ADDIN_NAME%" "%DEST_DIR%\"
+copy /Y "%SOURCE_DIR%%ADDIN_NAME%" "%DEST_DIR%\" >nul
 
-:: ---- AUTO-ENABLE THE ADD-IN ----
-:: Office stores enabled add-ins in HKCU\Software\Microsoft\Office\<version>\PowerPoint\AddIns\<addin_name>
-:: Adjust 16.0 if using Office 2013 (15.0), Office 2010 (14.0), etc.
-set OFFICE_VER=16.0
-set ADDIN_KEY=HKCU\Software\Microsoft\Office\%OFFICE_VER%\PowerPoint\AddIns\SaveAsPDF-5
+:: Clean old registry entries
+echo Cleaning old registry entries...
+reg delete "%ADDIN_KEY%" /f >nul 2>&1
+reg delete "%STARTUP_KEY%" /f >nul 2>&1
 
-echo Registering add-in in the registry...
+:: Register the add-in (simulate "checked once")
+echo Registering add-in in registry...
 reg add "%ADDIN_KEY%" /v Path /t REG_SZ /d "%DEST_DIR%\%ADDIN_NAME%" /f >nul
 reg add "%ADDIN_KEY%" /v AutoLoad /t REG_DWORD /d 1 /f >nul
 reg add "%ADDIN_KEY%" /v LoadBehavior /t REG_DWORD /d 3 /f >nul
-reg add "%ADDIN_KEY%" /v FriendlyName /t REG_SZ /d "Save As PDF Add-in" /f >nul
-reg add "%ADDIN_KEY%" /v Description /t REG_SZ /d "Exports presentations as PDF in same folder" /f >nul
+reg add "%ADDIN_KEY%" /v FriendlyName /t REG_SZ /d "%FRIENDLY_NAME%" /f >nul
+reg add "%ADDIN_KEY%" /v Description /t REG_SZ /d "%DESCRIPTION%" /f >nul
 
-echo.
-echo ✅ Deployment complete.
-echo The add-in "%ADDIN_NAME%" has been copied and auto-enabled.
-echo Please restart PowerPoint to see the new functionality.
-echo.
-
+echo ✅ Install complete. Please restart PowerPoint.
 pause
 endlocal
