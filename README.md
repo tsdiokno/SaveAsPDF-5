@@ -1,34 +1,36 @@
-# Save As PDF PowerPoint Add-in
+# SaveAsPDF-5 PowerPoint Add-in
+
+One-click PDF export for PowerPoint — no menus, no hassle.
 
 Are you tired of the endless clicks it takes to save your PowerPoint as a PDF in the right folder? You’re not alone. Many PowerPoint users struggle with this exact hassle every single day.
 
-That’s why I built the **Save As PDF Add-in** — with some help from ChatGPT, vibecoded into reality — the one-click solution that puts an end to the frustration.
+That’s why I built the **SaveAsPDF-5 Add-in** — with some help from ChatGPT, vibecoded into reality — the one-click solution that puts an end to the frustration.
 
 ---
 
 ## 😫 The Problem
 
-Saving a PowerPoint as a PDF normally means:
+PowerPoint already offers multiple official ways to export:
 
-* Digging through menus
-* Clicking *Save As* → *PDF* → *Browse* → *Choose folder* … every time
-* Losing time and focus just to get a simple export
+* **File > Save As > Save as Adobe PDF**
+* **File > Save As Adobe PDF** (choose folder each time)
+* **File > Export > Create Adobe PDF**
 
-For heavy PowerPoint users, this process is a productivity killer.
+With the modern file interface, each of these paths involves extra dialogs, folder navigation, and repeated clicks. If you only export occasionally, it’s fine — but if you do it often, the friction quickly adds up.
 
 ---
 
 ## 😍 The Agitation
 
-Think about it: You just wrapped up a presentation. You’re ready to share it. But instead of sending it right away, you’re stuck fighting menus — over and over again.
+Think about it: You just wrapped up a presentation. You’re ready to share it. But instead of sending it right away, you’re stuck digging through menus and dialogs — over and over again.
 
-It feels like such a small thing… but repeated a hundred times, it adds up to hours wasted every month. Hours you could spend on actual work.
+It feels like a small thing… but repeated a hundred times, it adds up to hours wasted every month. Hours you could spend on actual work.
 
 ---
 
 ## 🚀 The Solution
 
-The **Save As PDF Add-in** adds a simple macro to PowerPoint that does exactly what you wish Microsoft had built in:
+The **SaveAsPDF-5 Add-in** adds a simple macro to PowerPoint that does exactly what you wish Microsoft had built in:
 
 👉 **Save your presentation as a PDF directly into the same folder as your PPTX — instantly.**
 
@@ -112,6 +114,6 @@ MIT License – free to use, modify, and share.
 
 ## ⚡ Why You’ll Love It
 
-If you’re constantly making decks and sending PDFs, this tool will save you **hours every month**. It’s fast, lightweight, and built for real users who are sick of wasting time.
+If you’re constantly making decks and sending PDFs, this tool will save you **hours every month**. It’s fast, lightweight, and built for real users who just want less friction.
 
 👉 Install it once. Enjoy it forever.
