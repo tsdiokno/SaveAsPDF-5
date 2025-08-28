@@ -39,7 +39,7 @@ No browsing. No menus. Just one click.
 ## ✨ Key Features
 
 * One-click **Save As PDF** in the same folder as your `.pptx`
-* Installs with a single batch file — no tech skills required
+* Simple installer with cleanup/uninstall support
 * Works with PowerPoint 2010, 2013, 2016, 2019, 2021, and Office 365
 * Fully trusted add-in — no scary security prompts
 
@@ -55,13 +55,34 @@ No browsing. No menus. Just one click.
 
 2. Run the installer:
 
-   * Double-click `install.bat`
-   * That’s it. The script will:
+   * Open a Command Prompt or PowerShell window in the folder
+   * Run:
+
+     ```sh
+     .\install.bat
+     ```
+   * The script will:
 
      * Copy `SaveAsPDF-5.ppam` into your AddIns folder
-     * Auto-register it so it loads every time you open PowerPoint
+     * Register it in the registry so it auto-loads
 
 3. Restart PowerPoint. Done.
+
+---
+
+## 🗑 How to Uninstall
+
+If you ever want to remove the add-in:
+
+```sh
+.\install.bat /uninstall
+```
+
+This will:
+
+* Delete the `.ppam` file from your AddIns folder
+* Remove all registry entries
+* Restore PowerPoint to its original state
 
 ---
 
