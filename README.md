@@ -50,7 +50,7 @@ No browsing. No menus. Just one click.
 1. Download this repo (or clone it):
 
    ```sh
-   git clone https://github.com/YOUR-USERNAME/SaveAsPDF-Addin.git
+   git clone https://github.com/tsdiokno/SaveAsPDF-5.git
    ```
 
 2. Run the installer:
