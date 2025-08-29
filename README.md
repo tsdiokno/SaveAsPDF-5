@@ -6,6 +6,8 @@ Are you tired of the endless clicks it takes to save your PowerPoint as a PDF in
 
 That’s why I built the **SaveAsPDF-5 Add-in** — with some help from ChatGPT, vibecoded into reality — the one-click solution that puts an end to the frustration.
 
+![Demo GIF](https://raw.githubusercontent.com/tsdiokno/SaveAsPDF-5/blob/main/SaveAsPDF-5_Demo.gif)
+
 ---
 
 ## 😫 The Problem
